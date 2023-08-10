@@ -26,7 +26,7 @@ def get_web_data():
 
     # for r in content:
     #     print(r)
-    return content
+    return 'data...'
 
 
 
