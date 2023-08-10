@@ -1,5 +1,6 @@
 from flask import Flask
 import requests
+import json
 
 app = Flask(__name__)
 
@@ -13,7 +14,19 @@ def user():
 
 @app.route('/data')
 def get_web_data():
-    res = requests.get("https://baidu.com")
+    res = requests.get("https://stockapi.com.cn/v1/base/dragonTiger?date=2023-07-21")
     res_text = res.text
-    return res_text
+    stocks = json.loads(res_text)
+
+    content = set()
+
+
+    for stock in stocks["data"]:
+        content.add(stock["name"])
+
+    # for r in content:
+    #     print(r)
+    return content
+
+
 
