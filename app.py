@@ -15,6 +15,5 @@ def user():
 def get_web_data():
     res = requests.get("https://baidu.com")
     res_text = res.text
-    stocks = json.loads(res_text)
     return res_text
 
