@@ -23,15 +23,9 @@ def get_web_data():
         res = requests.get(url)
         res_text = res.text
         stocks = json.loads(res_text)
-    
-        content = set()
-    
+        content = set()    
         for stock in stocks["data"]:
             content.add(stock["name"])
-
-        # for r in content:
-        #     print(r)
         return "<h3>"+str(date.date())+"龙虎榜数据：</h3>"+str(content)
-
-      except Exception as e:
-          return '暂无相关数据...'
+    except Exception as e:
+        return '暂无相关数据...'
