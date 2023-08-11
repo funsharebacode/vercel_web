@@ -19,7 +19,7 @@ def get_web_data():
     date = datetime.now(pytz.timezone('Asia/Shanghai'))
     try:
         url = 'https://stockapi.com.cn/v1/base/dragonTiger?date={0}'
-        res = requests.get(url.format(date.date()))
+        res = requests.get(url.format(date.date())
         res_text = res.text
         stocks = json.loads(res_text)
     
