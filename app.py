@@ -2,7 +2,7 @@ from flask import Flask
 import requests
 import json
 from datetime import datetime
-# import pytz
+import pytz
 
 app = Flask(__name__)
 
@@ -16,8 +16,8 @@ def user():
 
 @app.route('/data')
 def get_web_data():
-    # date = datetime.now(pytz.timezone('Asia/Shanghai'))
-    date = datetime.now()
+    date = datetime.now(pytz.timezone('Asia/Shanghai'))
+  
     try:
         url = 'https://stockapi.com.cn/v1/base/dragonTiger?date='+str(date.date())
         res = requests.get(url)
@@ -31,7 +31,7 @@ def get_web_data():
 
         # for r in content:
         #     print(r)
-        return "<h3>"+date+"龙虎榜数据：</h3>"+str(content)
+        return "<h3>"+str(date.date())+"龙虎榜数据：</h3>"+str(content)
 
       except Exception as e:
           return '暂无相关数据...'
