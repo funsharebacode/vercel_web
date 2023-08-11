@@ -16,7 +16,8 @@ def user():
 
 @app.route('/data')
 def get_web_data():
-    date = datetime.now(pytz.timezone('Asia/Shanghai'))
+    # date = datetime.now(pytz.timezone('Asia/Shanghai'))
+    date = datetime.now()
     try:
         url = 'https://stockapi.com.cn/v1/base/dragonTiger?date='+str(date.date())
         res = requests.get(url)
