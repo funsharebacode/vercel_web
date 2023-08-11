@@ -18,7 +18,7 @@ def user():
 def get_web_data():
     date = datetime.now(pytz.timezone('Asia/Shanghai'))
     try:
-        res = requests.get("https://stockapi.com.cn/v1/base/dragonTiger?date="+date.date())
+        res = requests.get("https://stockapi.com.cn/v1/base/dragonTiger?date={0}".format(date.date()))
         res_text = res.text
         stocks = json.loads(res_text)
     
