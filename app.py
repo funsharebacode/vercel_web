@@ -12,7 +12,7 @@ def hello_world():
 @app.route('/user')
 def user():
     t = time.localtime()
-    return t+''
+    return str(t)
 
 @app.route('/data')
 def get_web_data():
