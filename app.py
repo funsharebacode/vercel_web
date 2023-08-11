@@ -11,7 +11,8 @@ def hello_world():
 
 @app.route('/user')
 def user():
-    return 'user...'
+    t = time.localtime()
+    return r'{t}'
 
 @app.route('/data')
 def get_web_data():
