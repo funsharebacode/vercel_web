@@ -13,6 +13,7 @@ def hello_world():
 
 @app.route('/user')
 def user():
+    return 'stock'
     # # 引入 pywencai 库
     # res = pywencai.get(query='当前涨幅',find=['600519', '000010'])
     # # 获取列名 -> 涨跌幅:前复权[20230811]
@@ -30,7 +31,7 @@ def user():
     # # 生成json api
     # stock_api = json.dumps(stocks,ensure_ascii=False)
     
-    return 'stock'
+    
 
 @app.route('/data')
 def get_web_data():
