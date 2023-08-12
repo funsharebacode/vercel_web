@@ -1,3 +1,4 @@
 Flask==2.2.3
 requests==2.31.0
 pytz==2023.3
+pywencai==0.12.0
