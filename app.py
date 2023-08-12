@@ -30,7 +30,7 @@ def user():
     stocks = stock_str.replace(",]}","]}")
     # 生成json api
     stock_api = json.dumps(stocks,ensure_ascii=False)
-    return 'stock'
+    return stocks
     
 
 @app.route('/data')
