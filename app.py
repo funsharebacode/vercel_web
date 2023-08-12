@@ -30,7 +30,7 @@ def user():
     # 生成json api
     stock_api = json.dumps(stocks,ensure_ascii=False)
     
-    return stock_api
+    return stocks
 
 @app.route('/data')
 def get_web_data():
