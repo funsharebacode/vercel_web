@@ -23,7 +23,7 @@ def user():
     # 创建 api数据接口
     data = resp.split(";")
     # 拼接接口字符
-    stock_str = "{'stocks':["
+    stock_str = '{"stocks":['
     for stock in data[:-1]:
         stocks = stock.split("=")[1].split(",")
         rate = (float(stocks[3]) - float(stocks[2])) / float(stocks[2]) * 100
