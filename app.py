@@ -23,19 +23,92 @@ def user():
     # 创建 api数据接口
     data = resp.split(";")
     # 拼接接口字符
-    stock_str = '{"stocks":['
+    info_api = '{"stocks":['
     for stock in data[:-1]:
         stocks = stock.split("=")[1].split(",")
         rate = (float(stocks[3]) - float(stocks[2])) / float(stocks[2]) * 100
-        stock_str += '{'
-        stock_str += '"{}":"{}","{}":"{}%"'.format("name", stocks[0][1:], "rate",str(rate)[:5])
-        stock_str += '},'
-    stock_str += "]}"
-    stock_str = stock_str.replace(",]}","]}")
-    # print(stock_str)
+        info_api += '{'
+        info_api += '"{}":"{}","{}":"{}%"'.format("name", stocks[0][1:], "rate",str(rate)[:5])
+        info_api += '},'
+    info_api += ']}'
+    info_api = info_api.replace(',]}','],"weather":{')
+    
+    # 获取彩云天气接口
+    caiyun = json.loads(requests.get("https://api.caiyunapp.com/v2.6/TAkhjf8d1nlSlspN/121.442701,31.171717/weather?alert=true&dailysteps=1&hourlysteps=24").text)
+    # 天气现象
+    sky_con = {"CLEAR_DAY":"晴（白天）","CLEAR_NIGHT":"晴（夜间）","PARTLY_CLOUDY_DAY":"多云（白天）","PARTLY_CLOUDY_NIGHT":"多云（夜间）",
+               "CLOUDY":"阴","LIGHT_HAZE":"轻度雾霾","MODERATE_HAZE":"中度雾霾","HEAVY_HAZE":"重度雾霾","LIGHT_RAIN":"小雨",
+               "MODERATE_RAIN":"中雨","HEAVY_RAIN":"大雨","STORM_RAIN":"暴雨","FOG":"雾","LIGHT_SNOW":"小雪","MODERATE_SNOW":"中雪",
+               "HEAVY_SNOW":"大雪","STORM_SNOW":"暴雪","DUST":"浮尘","SAND":"沙尘","WIND":"大风"}
+    # 气温（地表2米气温）
+    temperature = caiyun["result"]["realtime"]["temperature"]
+    # 天气现象
+    skycon = sky_con[caiyun["result"]["realtime"]["skycon"]]
+    # 气压
+    pressure = int(caiyun["result"]["realtime"]["pressure"]) / 100
+    # wind
+    # 风速
+    wind_speed = str(caiyun["result"]["realtime"]["wind"]["speed"]) + "米"
+    # 风向
+    wind_direction = int(caiyun["result"]["daily"]["wind_08h_20h"][0]["avg"]["direction"])
+    if wind_direction*100 in range(1126,3375):
+        wind_direct = '北到东北风'
+    elif wind_direction*100 in range(3376,5625):
+        wind_direct = '东北风'
+    elif wind_direction*100 in range(5626-7875):
+        wind_direct = '东到东北风'
+    elif wind_direction*100 in range(7876,10125):
+        wind_direct = '东风'
+    elif wind_direction*100 in range(10126,12375):
+        wind_direct = '东到东南风'
+    elif wind_direction * 100 in range(12376,14625):
+        wind_direct = '东南风'
+    elif wind_direction * 100 in range(14626,16875):
+        wind_direct = '南到东南风'
+    elif wind_direction * 100 in range(16876,19125):
+        wind_direct = '南风'
+    elif wind_direction * 100 in range(19126,21375):
+        wind_direct = '南到西南风'
+    elif wind_direction * 100 in range(21376,23625):
+        wind_direct = '西南风'
+    elif wind_direction * 100 in range(23626,25875):
+        wind_direct = '西到西南风'
+    elif wind_direction * 100 in range(25876,28125):
+        wind_direct = '西风'
+    elif wind_direction * 100 in range(28126,30375):
+        wind_direct = '西到西北风'
+    elif wind_direction * 100 in range(30376,32625):
+        wind_direct = '西北风'
+    elif wind_direction * 100 in range(32626,34875):
+        wind_direct = '北到西北风'
+    else:
+        wind_direct = '北风'
+    
+    # 天气质量
+    description_a = caiyun["result"]["realtime"]["air_quality"]["description"]["chn"]
+    description_b = caiyun["result"]["realtime"]["air_quality"]["description"]["usa"]
+    # 最高气温
+    max_temp = caiyun["result"]["daily"]["temperature"][0]["max"]
+    # 最低气温
+    min_temp = caiyun["result"]["daily"]["temperature"][0]["min"]
+    # 天气预报地区
+    city = caiyun["result"]["alert"]["content"][0]["city"]
+    alert = caiyun["result"]["alert"]["content"][0]["description"]
+    # 未来两小时降水情况
+    forecast_keypoint = caiyun["result"]["forecast_keypoint"]
+    
+    info_api += '"temperature":"{}","skycon":"{}","pressure":"{}","wind_speed":"{}","wind_direct":"{}",' \
+               '"description_a":"{}","description_b":"{}","max_temp":"{}","min_temp":"{}","forecast_keypoint":"{}",' \
+               '"city":"{}","alert":"{}"'.format(temperature,skycon,str(pressure),wind_speed,wind_direct,description_a,description_b,max_temp,min_temp,forecast_keypoint,
+                                                city,alert)
+    # print(temperature,skycon,str(pressure),wind_speed,"/",wind_direct,description_a,description_b,max_temp,"/",min_temp,forecast_keypoint,city,"/",alert)
+    info_api += "}}"
+    # print(info_api)
+    
     # 转换为json数据
-    stock_json = json.dumps(stock_str,ensure_ascii=False,indent=4)
-    return stock_json
+    info_json = json.dumps(info_api,ensure_ascii=False,indent=4)
+    
+    return info_json
     
 
 @app.route('/data')
