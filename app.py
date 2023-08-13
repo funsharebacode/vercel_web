@@ -7,8 +7,9 @@ import pytz
 import pywencai
 
 app = Flask(__name__)
-# app.json.ensure_ascii = False
 app.json.response(encodings="utf-8")
+app.json.ensure_ascii = False
+
 
 @app.route('/')
 def hello_world():
