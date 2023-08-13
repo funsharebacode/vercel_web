@@ -35,6 +35,9 @@ def user():
     
     # 获取彩云天气接口
     caiyun = json.loads(requests.get("https://api.caiyunapp.com/v2.6/TAkhjf8d1nlSlspN/121.442701,31.171717/weather?alert=true&dailysteps=1&hourlysteps=24").text)
+    area = requests.get('https://api.caiyunapp.com/v2.6/TAkhjf8d1nlSlspN/121.442701,31.171717/realtime?alert=true').text
+    # 天气预报地区
+    city = caiyun["result"]["alert"]["adcodes"][0]["name"] + "|" +  caiyun["result"]["alert"]["adcodes"][2]["name"]
     # 天气现象
     sky_con = {"CLEAR_DAY":"晴（白天）","CLEAR_NIGHT":"晴（夜间）","PARTLY_CLOUDY_DAY":"多云（白天）","PARTLY_CLOUDY_NIGHT":"多云（夜间）",
                "CLOUDY":"阴","LIGHT_HAZE":"轻度雾霾","MODERATE_HAZE":"中度雾霾","HEAVY_HAZE":"重度雾霾","LIGHT_RAIN":"小雨",
@@ -91,16 +94,13 @@ def user():
     max_temp = caiyun["result"]["daily"]["temperature"][0]["max"]
     # 最低气温
     min_temp = caiyun["result"]["daily"]["temperature"][0]["min"]
-    # 天气预报地区
-    city = caiyun["result"]["alert"]["content"][0]["city"]
-    alert = caiyun["result"]["alert"]["content"][0]["description"]
     # 未来两小时降水情况
     forecast_keypoint = caiyun["result"]["forecast_keypoint"]
     
     info_api += '"temperature":"{}","skycon":"{}","pressure":"{}","wind_speed":"{}","wind_direct":"{}",' \
                '"description_a":"{}","description_b":"{}","max_temp":"{}","min_temp":"{}","forecast_keypoint":"{}",' \
-               '"city":"{}","alert":"{}"'.format(temperature,skycon,str(pressure),wind_speed,wind_direct,description_a,description_b,max_temp,min_temp,forecast_keypoint,
-                                                city,alert)
+               '"city":"{}"'.format(temperature,skycon,str(pressure),wind_speed,wind_direct,description_a,description_b,max_temp,min_temp,forecast_keypoint,city
+                                                )
     # print(temperature,skycon,str(pressure),wind_speed,"/",wind_direct,description_a,description_b,max_temp,"/",min_temp,forecast_keypoint,city,"/",alert)
     info_api += "}}"
     # print(info_api)
