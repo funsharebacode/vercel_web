@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Flask,jsonify
+from flask import Flask
 import requests
 import json
 from datetime import datetime
@@ -7,8 +7,6 @@ import pytz
 import pywencai
 
 app = Flask(__name__)
-app.json.response(encodings="utf-8")
-app.json.ensure_ascii = False
 
 
 @app.route('/')
@@ -106,7 +104,7 @@ def user():
                 "description_a":description_a,"description_b":description_b,"max_temp":max_temp,"min_temp":min_temp,"forecast_keypoint":forecast_keypoint,
                 "city":city}
 
-    return jsonify(info_api)
+    return json.dumps(info_api,ensure_ascii=False)
     
 
 @app.route('/data')
