@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Flask
+from flask import Flask,render_template,request
 import requests
 import json
 from datetime import datetime
@@ -12,6 +12,10 @@ app = Flask(__name__)
 @app.route('/')
 def hello_world():
     return 'Hello World'
+
+@app.route('/stock')
+def html():
+    return render_template('index.html')
 
 @app.route('/user')
 def user():
