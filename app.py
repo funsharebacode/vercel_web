@@ -17,7 +17,7 @@ def hello_world():
 def html():
     return render_template('index.html')
 
-@app.route('/user')
+@app.route('/user',methods=['GET','POST'])
 def user():
     # 股票代码
     stock_code = request.form.get('stock_code').split(",")
