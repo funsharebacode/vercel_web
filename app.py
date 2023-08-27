@@ -33,7 +33,7 @@ def user():
     # 设置请求头
     headers = {'referer': 'http://finance.sina.com.cn'}
     # 获取股票接口
-    resp = requests.get('http://hq.sinajs.cn/list=' + '300315,002642', headers=headers, timeout=6).text
+    resp = requests.get('http://hq.sinajs.cn/list=' + 'sz300315,sz002642', headers=headers, timeout=6).text
     # print(resp)
     # 创建 api数据接口
     data = resp.split(";")
