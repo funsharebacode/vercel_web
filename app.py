@@ -60,7 +60,7 @@ def user():
                "MODERATE_SNOW": "中雪",
                "HEAVY_SNOW": "大雪", "STORM_SNOW": "暴雪", "DUST": "浮尘", "SAND": "沙尘", "WIND": "大风"}
     # 气温（地表2米气温）
-    temperature = caiyun["result"]["realtime"]["temperature"]
+    temperature = int(caiyun["result"]["realtime"]["temperature"])
     # 天气现象
     skycon = sky_con[caiyun["result"]["realtime"]["skycon"]]
     # 气压
@@ -71,35 +71,35 @@ def user():
     # 风向
     wind_direction = int(caiyun["result"]["daily"]["wind_08h_20h"][0]["avg"]["direction"])
     if wind_direction * 100 in range(1126, 3375):
-        wind_direct = '北到东北风'
+        wind_direct = '北-东北风'
     elif wind_direction * 100 in range(3376, 5625):
         wind_direct = '东北风'
     elif wind_direction * 100 in range(5626 - 7875):
-        wind_direct = '东到东北风'
+        wind_direct = '东-东北风'
     elif wind_direction * 100 in range(7876, 10125):
         wind_direct = '东风'
     elif wind_direction * 100 in range(10126, 12375):
-        wind_direct = '东到东南风'
+        wind_direct = '东-东南风'
     elif wind_direction * 100 in range(12376, 14625):
         wind_direct = '东南风'
     elif wind_direction * 100 in range(14626, 16875):
-        wind_direct = '南到东南风'
+        wind_direct = '南-东南风'
     elif wind_direction * 100 in range(16876, 19125):
         wind_direct = '南风'
     elif wind_direction * 100 in range(19126, 21375):
-        wind_direct = '南到西南风'
+        wind_direct = '南-西南风'
     elif wind_direction * 100 in range(21376, 23625):
         wind_direct = '西南风'
     elif wind_direction * 100 in range(23626, 25875):
-        wind_direct = '西到西南风'
+        wind_direct = '西-西南风'
     elif wind_direction * 100 in range(25876, 28125):
         wind_direct = '西风'
     elif wind_direction * 100 in range(28126, 30375):
-        wind_direct = '西到西北风'
+        wind_direct = '西-西北风'
     elif wind_direction * 100 in range(30376, 32625):
         wind_direct = '西北风'
     elif wind_direction * 100 in range(32626, 34875):
-        wind_direct = '北到西北风'
+        wind_direct = '北-西北风'
     else:
         wind_direct = '北风'
 
@@ -107,9 +107,9 @@ def user():
     description_a = caiyun["result"]["realtime"]["air_quality"]["description"]["chn"]
     description_b = caiyun["result"]["realtime"]["air_quality"]["description"]["usa"]
     # 最高气温
-    max_temp = caiyun["result"]["daily"]["temperature"][0]["max"]
+    max_temp = int(caiyun["result"]["daily"]["temperature"][0]["max"])
     # 最低气温
-    min_temp = caiyun["result"]["daily"]["temperature"][0]["min"]
+    min_temp = int(caiyun["result"]["daily"]["temperature"][0]["min"])
     # 未来两小时降水情况
     forecast_keypoint = caiyun["result"]["forecast_keypoint"]
 
