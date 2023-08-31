@@ -14,6 +14,10 @@ app = Flask(__name__)
 def hello_world():
     return 'Hello World'
 
+@app.route("/kcb")
+def kcb():
+    return render_template('kcb.html')
+
 @app.route('/stock')
 def html():
     return render_template('index.html')
