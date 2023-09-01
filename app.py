@@ -38,8 +38,8 @@ def user():
     headers = {'referer': 'http://finance.sina.com.cn'}
     # 获取股票接口
     str = ''
-    stocks = ['sz300315','sz002642']
-    for s in stocks:
+    user_stocks = ['sz300315','sz002642']
+    for s in user_stocks:
         str += s + ','
     resp = requests.get('http://hq.sinajs.cn/list=' + str[:-1], headers=headers, timeout=6).text
     # print(resp)
@@ -50,7 +50,7 @@ def user():
     for index,stock in enumerate(data[:-1]):
         stocks = stock.split("=")[1].split(",")
         rate = str((float(stocks[3]) - float(stocks[2])) / float(stocks[2]) * 100)[:5] + "%"
-        info_api["stocks"].append({"code":stocks[index],"name":stocks[0][1:],"rate":rate})
+        info_api["stocks"].append({"code":user_stocks[index],"name":stocks[0][1:],"rate":rate})
 
 
     # 获取彩云天气接口
