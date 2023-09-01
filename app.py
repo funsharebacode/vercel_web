@@ -41,7 +41,7 @@ def user():
     stocks = ['sz300315','sz002642']
     for s in stocks:
         str += s + ','
-    resp = requests.get('http://hq.sinajs.cn/list=' + str[:-1], headers=headers, timeout=6).text
+    resp = requests.get('http://hq.sinajs.cn/list=' + str[:-2], headers=headers, timeout=6).text
     # print(resp)
     # 创建 api数据接口
     data = resp.split(";")
