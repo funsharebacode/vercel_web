@@ -38,15 +38,18 @@ def user():
     headers = {'referer': 'http://finance.sina.com.cn'}
     # 获取股票接口
     str = ''
-    user_stocks = ['sz300315','sz002642']
+    user_stocks = ['sz300315', 'sz002642']
     for s in user_stocks:
         str += s + ','
     resp = requests.get('http://hq.sinajs.cn/list=' + str[:-1], headers=headers, timeout=6).text
     # print(resp)
     # 创建 api数据接口
+    
+    # print(resp)
+    
     data = resp.split(";")
     # 拼接接口字符
-    info_api = {"stocks":[]}
+    info_api = {"stocks": []}
     for index,stock in enumerate(data[:-1]):
         stocks = stock.split("=")[1].split(",")
         rate = (float(stocks[3]) - float(stocks[2])) / float(stocks[2]) * 100
