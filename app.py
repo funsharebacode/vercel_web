@@ -37,8 +37,11 @@ def user():
     # 设置请求头
     headers = {'referer': 'http://finance.sina.com.cn'}
     # 获取股票接口
+    str = ''
     stocks = ['sz300315','sz002642']
-    resp = requests.get('http://hq.sinajs.cn/list=' + str(stocks), headers=headers, timeout=6).text
+    for s in stocks:
+        str += s + ','
+    resp = requests.get('http://hq.sinajs.cn/list=' + str[:-1], headers=headers, timeout=6).text
     # print(resp)
     # 创建 api数据接口
     data = resp.split(";")
