@@ -50,7 +50,7 @@ def user():
     for index,stock in data[:-1]:
         stocks = stock.split("=")[1].split(",")
         rate = str((float(stocks[3]) - float(stocks[2])) / float(stocks[2]) * 100)[:5] + "%"
-        info_api["stocks"].append({"code":stock[index],"name":stocks[0][1:],"rate":rate})
+        info_api["stocks"].append({"code":stocks[index],"name":stocks[0][1:],"rate":rate})
 
 
     # 获取彩云天气接口
