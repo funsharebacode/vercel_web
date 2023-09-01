@@ -37,16 +37,17 @@ def user():
     # 设置请求头
     headers = {'referer': 'http://finance.sina.com.cn'}
     # 获取股票接口
-    resp = requests.get('http://hq.sinajs.cn/list=' + 'sz300315,sz002642', headers=headers, timeout=6).text
+    stocks = ['sz300315','sz002642']
+    resp = requests.get('http://hq.sinajs.cn/list=' + str(stocks), headers=headers, timeout=6).text
     # print(resp)
     # 创建 api数据接口
     data = resp.split(";")
     # 拼接接口字符
     info_api = {"stocks":[]}
-    for stock in data[:-1]:
+    for index,stock in data[:-1]:
         stocks = stock.split("=")[1].split(",")
         rate = str((float(stocks[3]) - float(stocks[2])) / float(stocks[2]) * 100)[:5] + "%"
-        info_api["stocks"].append({"name":stocks[0][1:],"rate":rate})
+        info_api["stocks"].append({"code":stock[index],"name":stocks[0][1:],"rate":rate})
 
 
     # 获取彩云天气接口
