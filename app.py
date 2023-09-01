@@ -47,7 +47,7 @@ def user():
     data = resp.split(";")
     # 拼接接口字符
     info_api = {"stocks":[]}
-    for index,stock in data[:-1]:
+    for index,stock in enumerate(data[:-1]):
         stocks = stock.split("=")[1].split(",")
         rate = str((float(stocks[3]) - float(stocks[2])) / float(stocks[2]) * 100)[:5] + "%"
         info_api["stocks"].append({"code":stocks[index],"name":stocks[0][1:],"rate":rate})
