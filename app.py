@@ -124,7 +124,7 @@ def user():
     # 未来两小时降水情况
     forecast_keypoint = caiyun["result"]["forecast_keypoint"]
 
-    info_api["temperature"] = {"temperature":temperature,"skycon":skycon,"pressure":str(pressure),"wind_speed":wind_speed,"wind_direct":wind_direct,
+    info_api["temperature"] = {"temperature":temperature,"skycon":skycon,"pressure":pressure,"wind_speed":wind_speed,"wind_direct":wind_direct,
                 "description_a":description_a,"description_b":description_b,"max_temp":max_temp,"min_temp":min_temp,"forecast_keypoint":forecast_keypoint,
                 "city":city}
 
