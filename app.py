@@ -75,10 +75,10 @@ def user():
     # 天气现象
     skycon = sky_con[caiyun["result"]["realtime"]["skycon"]]
     # 气压
-    pressure = int(caiyun["result"]["realtime"]["pressure"]) / 100
+    pressure = '{}'.format(int(caiyun["result"]["realtime"]["pressure"]) / 100)
     # wind
     # 风速
-    wind_speed = str(caiyun["result"]["realtime"]["wind"]["speed"]) + "米"
+    wind_speed = '{}'.format(caiyun["result"]["realtime"]["wind"]["speed"]) + '米'
     # 风向
     wind_direction = int(caiyun["result"]["daily"]["wind_08h_20h"][0]["avg"]["direction"])
     if wind_direction * 100 in range(1126, 3375):
