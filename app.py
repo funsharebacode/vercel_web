@@ -38,7 +38,7 @@ def user():
     headers = {'referer': 'http://finance.sina.com.cn'}
     # 获取股票接口
     str = ''
-    user_stocks = ['sz300315', 'sz002642']
+    user_stocks = ['sz002467', 'sz002642']
     for s in user_stocks:
         str += s + ','
     resp = requests.get('http://hq.sinajs.cn/list=' + str[:-1], headers=headers, timeout=6).text
