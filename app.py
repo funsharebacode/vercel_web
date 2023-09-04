@@ -61,7 +61,7 @@ def user():
     pos = request.args.get('pos', '31.171717,90.000000')
     caiyun = json.loads(requests.get(
         "https://api.caiyunapp.com/v2.6/TAkhjf8d1nlSlspN/" + pos + "/weather?alert=true&dailysteps=1&hourlysteps=24").text)
-    area = requests.get('https://api.caiyunapp.com/v2.6/TAkhjf8d1nlSlspN/121.442701,31.171717/realtime?alert=true').text
+    area = requests.get('https://api.caiyunapp.com/v2.6/TAkhjf8d1nlSlspN/' + pos +'/realtime?alert=true').text
     # 天气预报地区
     # city = caiyun["result"]["alert"]["adcodes"][0]["name"] + "|" + caiyun["result"]["alert"]["adcodes"][2]["name"]
     city = caiyun["result"]["alert"]["adcodes"][2]["name"]
