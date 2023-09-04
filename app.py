@@ -59,15 +59,15 @@ def user():
     # 获取彩云天气接口
     # 获取用户请求时提供的位置信息
     pos = request.args.get('pos')
-    if(pos!=null){
+    if pos!=null:
          caiyun = json.loads(requests.get(
         "https://api.caiyunapp.com/v2.6/TAkhjf8d1nlSlspN/" + pos + "/weather?alert=true&dailysteps=1&hourlysteps=24").text)
          area = requests.get('https://api.caiyunapp.com/v2.6/TAkhjf8d1nlSlspN/' + pos +'/realtime?alert=true').text
-    }else{
+    else:
          caiyun = json.loads(requests.get(
         "https://api.caiyunapp.com/v2.6/TAkhjf8d1nlSlspN/121.442701,31.171717/weather?alert=true&dailysteps=1&hourlysteps=24").text)
         area = requests.get('https://api.caiyunapp.com/v2.6/TAkhjf8d1nlSlspN/121.442701,31.171717/realtime?alert=true').text
-    }
+
    
     
     # 天气预报地区
