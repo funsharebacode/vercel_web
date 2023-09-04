@@ -57,11 +57,14 @@ def user():
 
 
     # 获取彩云天气接口
+    # 获取用户请求时提供的位置信息
+    pos = request.args.get('pos', '31.171717,90.000000')
     caiyun = json.loads(requests.get(
-        "https://api.caiyunapp.com/v2.6/TAkhjf8d1nlSlspN/121.442701,31.171717/weather?alert=true&dailysteps=1&hourlysteps=24").text)
+        "https://api.caiyunapp.com/v2.6/TAkhjf8d1nlSlspN/" + pos + "/weather?alert=true&dailysteps=1&hourlysteps=24").text)
     area = requests.get('https://api.caiyunapp.com/v2.6/TAkhjf8d1nlSlspN/121.442701,31.171717/realtime?alert=true').text
     # 天气预报地区
-    city = caiyun["result"]["alert"]["adcodes"][0]["name"] + "|" + caiyun["result"]["alert"]["adcodes"][2]["name"]
+    # city = caiyun["result"]["alert"]["adcodes"][0]["name"] + "|" + caiyun["result"]["alert"]["adcodes"][2]["name"]
+    city = caiyun["result"]["alert"]["adcodes"][2]["name"]
     # 天气现象
     sky_con = {"CLEAR_DAY": "晴（白天）", "CLEAR_NIGHT": "晴（夜间）", "PARTLY_CLOUDY_DAY": "多云（白天）",
                "PARTLY_CLOUDY_NIGHT": "多云（夜间）",
