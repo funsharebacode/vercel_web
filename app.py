@@ -44,30 +44,28 @@ def user():
     resp = requests.get('http://hq.sinajs.cn/list=' + str[:-1], headers=headers, timeout=6).text
     # print(resp)
     # 创建 api数据接口
-    
+
     # print(resp)
-    
+
     data = resp.split(";")
     # 拼接接口字符
     info_api = {"stocks": []}
-    for index,stock in enumerate(data[:-1]):
+    for index, stock in enumerate(data[:-1]):
         stocks = stock.split("=")[1].split(",")
         rate = (float(stocks[3]) - float(stocks[2])) / float(stocks[2]) * 100
-        info_api["stocks"].append({"code":user_stocks[index],"name":stocks[0][1:],"rate":('%.2f'%rate) + '%'})
-
+        info_api["stocks"].append({"code": user_stocks[index], "name": stocks[0][1:], "rate": ('%.2f' % rate) + '%'})
 
     # 获取彩云天气接口
     # 获取用户请求时提供的位置信息
     pos = request.args.get('pos', "北 31.174074°东 121.443481°")
-    p = pos.split("­°")
+    p = pos.split("°")
     lastpos = ''
     lastpos += p[1][-10:].lstrip() + "," + p[0][-10:].lstrip()
-    
-    caiyun = json.loads(requests.get("https://api.caiyunapp.com/v2.6/TAkhjf8d1nlSlspN/"+ lastpos +"/weather?alert=true&dailysteps=1&hourlysteps=24").text)
-    area = requests.get('https://api.caiyunapp.com/v2.6/TAkhjf8d1nlSlspN/'+ lastpos +'/realtime?alert=true').text
 
-   
-    
+    caiyun = json.loads(requests.get(
+        "https://api.caiyunapp.com/v2.6/TAkhjf8d1nlSlspN/" + lastpos + "/weather?alert=true&dailysteps=1&hourlysteps=24").text)
+    area = requests.get('https://api.caiyunapp.com/v2.6/TAkhjf8d1nlSlspN/' + lastpos + '/realtime?alert=true').text
+
     # 天气预报地区
     # city = caiyun["result"]["alert"]["adcodes"][0]["name"] + "|" + caiyun["result"]["alert"]["adcodes"][2]["name"]
     city = caiyun["result"]["alert"]["adcodes"][2]["name"]
@@ -133,11 +131,13 @@ def user():
     # 未来两小时降水情况
     forecast_keypoint = caiyun["result"]["forecast_keypoint"]
 
-    info_api["temperature"] = {"temperature":temperature,"skycon":skycon,"pressure":pressure,"wind_speed":wind_speed,"wind_direct":wind_direct,
-                "description_a":description_a,"description_b":description_b,"max_temp":max_temp,"min_temp":min_temp,"forecast_keypoint":forecast_keypoint,
-                "city":city}
+    info_api["temperature"] = {"temperature": temperature, "skycon": skycon, "pressure": pressure,
+                               "wind_speed": wind_speed, "wind_direct": wind_direct,
+                               "description_a": description_a, "description_b": description_b, "max_temp": max_temp,
+                               "min_temp": min_temp, "forecast_keypoint": forecast_keypoint,
+                               "city": city}
 
-    return json.dumps(info_api,ensure_ascii=False)
+    return json.dumps(info_api, ensure_ascii=False)
     
 
 @app.route('/data')
