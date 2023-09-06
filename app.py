@@ -61,7 +61,7 @@ def user():
     pos = request.args.get('pos', "北 90.000000­°东 31.171717­°")
     p = pos.split("­°")
     lastpos = ''
-    lastpos += p[0][-10:].lstrip() + "," + p[1][-10:].lstrip()
+    lastpos += p[1][-10:].lstrip() + "," + p[0][-10:].lstrip()
     
     caiyun = json.loads(requests.get("https://api.caiyunapp.com/v2.6/TAkhjf8d1nlSlspN/"+ lastpos +"/weather?alert=true&dailysteps=1&hourlysteps=24").text)
     area = requests.get('https://api.caiyunapp.com/v2.6/TAkhjf8d1nlSlspN/'+ lastpos +'/realtime?alert=true').text
