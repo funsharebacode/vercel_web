@@ -58,7 +58,7 @@ def user():
 
     # 获取彩云天气接口
     # 获取用户请求时提供的位置信息
-    pos = request.args.get('pos', "北 31.174074°东 121.443481°")
+    pos = request.args.get('pos', "北 31.174074°东121.443481°")
     p = pos.split("­°")
     lastpos = ''
     lastpos += p[1][-10:].lstrip() + "," + p[0][-10:].lstrip()
