@@ -62,9 +62,11 @@ def user():
     lastpos = ''
     lastpos += p[1][-10:].lstrip() + "," + p[0][-10:].lstrip()
 
-    caiyun = json.loads(requests.get(
-        "https://api.caiyunapp.com/v2.6/TAkhjf8d1nlSlspN/" + lastpos + "/weather?alert=true&dailysteps=1&hourlysteps=24").text)
-    area = requests.get('https://api.caiyunapp.com/v2.6/TAkhjf8d1nlSlspN/' + lastpos + '/realtime?alert=true').text
+    url_a = "https://api.caiyunapp.com/v2.6/TAkhjf8d1nlSlspN/" + lastpos + "/weather?alert=true&dailysteps=1&hourlysteps=24"
+    url_b = "https://api.caiyunapp.com/v2.6/TAkhjf8d1nlSlspN/" + lastpos + "/realtime?alert=true"
+
+    caiyun = json.loads(requests.get(url_a).text)
+    area = requests.get(url_b).text
 
     # 天气预报地区
     # city = caiyun["result"]["alert"]["adcodes"][0]["name"] + "|" + caiyun["result"]["alert"]["adcodes"][2]["name"]
