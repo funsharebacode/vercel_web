@@ -25,7 +25,7 @@ def html():
 @app.route('/user',methods=['GET','POST'])
 def user():
     # 股票代码
-    user_stocks = request.args.get('stocks', "002465,002467")
+    req_stocks = request.args.get('stocks', [002465,002467])
     
     stocks = ''
     for code in user_stocks:
