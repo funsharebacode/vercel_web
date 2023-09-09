@@ -25,16 +25,16 @@ def html():
 @app.route('/user',methods=['GET','POST'])
 def user():
     # 股票代码
-    user_stocks = request.args.get('stocks', 'sz002465,sz002467')
-    
-    # stocks = ''
-    # for code in user_stocks:
-    #     if re.match(r'^(0|3)', code):
-    #         stocks += 'sz' + code + ','
-    #     elif re.match(r'^(6)', code):
-    #         stocks += 'sh' + code + ','
+    req_stocks = request.args.get('stocks', 'sz002465,sz002467')
+    user_stocks = req_stocks.split(',')
+    stocks = ''
+    for code in user_stocks:
+        if re.match(r'^(0|3)', code):
+            stocks += 'sz' + code + ','
+        elif re.match(r'^(6)', code):
+            stocks += 'sh' + code + ','
 
-    # stocks = stocks[:-1]
+    stocks = stocks[:-1]
     # 设置请求头
     headers = {'referer': 'http://finance.sina.com.cn'}
     # 获取股票接口
@@ -42,7 +42,7 @@ def user():
     # user_stocks = ['sz002467', 'sz002642']
     # for s in user_stocks:
     #     str += s + ','
-    resp = requests.get('http://hq.sinajs.cn/list=' + user_stocks, headers=headers, timeout=6).text
+    resp = requests.get('http://hq.sinajs.cn/list=' + stocks, headers=headers, timeout=6).text
     # print(resp)
     # 创建 api数据接口
 
