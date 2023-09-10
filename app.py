@@ -59,9 +59,10 @@ def user():
     # 获取彩云天气接口
     # 获取用户请求时提供的位置信息
     pos = request.args.get('pos', "90.000000,31.171717")
+    weathercode = request.args.get('weathercode', "TAkhjf8d1nlSlspN")
     
-    url_a = "https://api.caiyunapp.com/v2.6/TAkhjf8d1nlSlspN/" + pos + "/weather?alert=true&dailysteps=1&hourlysteps=24"
-    url_b = "https://api.caiyunapp.com/v2.6/TAkhjf8d1nlSlspN/" + pos + "/realtime?alert=true"
+    url_a = "https://api.caiyunapp.com/v2.6/" + weathercode + "/" + pos + "/weather?alert=true&dailysteps=1&hourlysteps=24"
+    url_b = "https://api.caiyunapp.com/v2.6/" + weathercode + "/" + pos + "/realtime?alert=true"
 
     caiyun = json.loads(requests.get(url_a).text)
     area = requests.get(url_b).text
