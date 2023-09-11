@@ -51,18 +51,19 @@ def user():
     data = resp.split(";")
     # 拼接接口字符
     info_api = {"stocks": []}
-    for index, stock in enumerate(data[:-1]):
-        stocks = stock.split("=")[1].split(",")
+    try:
+        for index, stock in enumerate(data[:-1]):
+            stocks = stock.split("=")[1].split(",")
 
-        if float(stocks[2]) != 0:
-            rate = (float(stocks[3]) - float(stocks[2])) / float(stocks[2]) * 100
-        else:
-            rate = 0
-
-
+            if float(stocks[2]) != 0:
+                rate = (float(stocks[3]) - float(stocks[2])) / float(stocks[2]) * 100
+            else:
+                rate = 0
 
         info_api["stocks"].append({"code": user_stocks[index], "name": stocks[0][1:], "rate": ('%.2f' % rate) + '%'})
-
+    except (IndexError,UnboundLocalError) as e:
+        info_api["stocks"].append({"code": 'no stocks data'})
+        
     # 获取彩云天气接口
     # 获取用户请求时提供的位置信息
     pos = request.args.get('pos', "90.000000,31.171717")
