@@ -60,7 +60,7 @@ def user():
             else:
                 rate = 0
 
-        info_api["stocks"].append({"code": user_stocks[index], "name": stocks[0][1:], "rate": ('%.2f' % rate) + '%'})
+            info_api["stocks"].append({"code": user_stocks[index], "name": stocks[0][1:], "rate": ('%.2f' % rate) + '%'})
     except (IndexError,UnboundLocalError) as e:
         info_api["stocks"].append({"code": 'no stocks data'})
         
