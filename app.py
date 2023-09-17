@@ -81,8 +81,8 @@ def user():
         # city = caiyun["result"]["alert"]["adcodes"][0]["name"] + "|" + caiyun["result"]["alert"]["adcodes"][2]["name"]
         city = caiyun["result"]["alert"]["adcodes"][2]["name"]
         # 天气现象
-        sky_con = {"CLEAR_DAY": "晴（白天）", "CLEAR_NIGHT": "晴（夜间）", "PARTLY_CLOUDY_DAY": "多云（白天）",
-                   "PARTLY_CLOUDY_NIGHT": "多云（夜间）",
+        sky_con = {"CLEAR_DAY": "晴", "CLEAR_NIGHT": "晴", "PARTLY_CLOUDY_DAY": "多云",
+                   "PARTLY_CLOUDY_NIGHT": "多云",
                    "CLOUDY": "阴", "LIGHT_HAZE": "轻度雾霾", "MODERATE_HAZE": "中度雾霾", "HEAVY_HAZE": "重度雾霾",
                    "LIGHT_RAIN": "小雨",
                    "MODERATE_RAIN": "中雨", "HEAVY_RAIN": "大雨", "STORM_RAIN": "暴雨", "FOG": "雾",
